@@ -1,0 +1,5 @@
+syntax = "proto3";
+
+package nindoo.wk;
+
+message Empty {}
