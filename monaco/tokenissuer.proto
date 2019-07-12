@@ -1,0 +1,35 @@
+syntax = "proto3";
+
+package tokenissuer;
+
+message SignPayloadRequest {
+  int32 ttl = 1;
+  string payload = 2;
+  string subject = 3;
+  string audience = 4;
+  bool isRaw = 5;
+}
+
+message GetPublicKeyRequest {
+
+}
+
+message PublicKey {
+  string publicKeyBase64 = 1;
+  string kid = 2;
+}
+
+message Token {
+  string token = 1;
+}
+
+message VerifyResponse {
+  bool isValid = 1;
+  string error = 2;
+}
+
+service TokenIssuer {
+  rpc Verify (Token) returns (VerifyResponse);
+  rpc Sign (SignPayloadRequest) returns (Token);
+  rpc GetPublicKey (GetPublicKeyRequest) returns (PublicKey);
+}
